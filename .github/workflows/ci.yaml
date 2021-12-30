@@ -122,7 +122,7 @@ jobs:
           --wait \
           --atomic \
           app \
-          ./k8s \
+          /k8s \
           --set image=${{ steps.repo.outputs.repo_name }} \
           --set user=${{ env.DB_USER }} \
           --set password=${{ env.DB_PASSWORD }} \
