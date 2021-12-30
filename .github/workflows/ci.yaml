@@ -113,8 +113,10 @@ jobs:
       - name: Connect to kubernetes cluster
         run: |
           aws eks --region ${{ env.AWS_REGION }} update-kubeconfig --name ${{ env.EKS_CLUSTER }}
+      - name: Get active Nodes
+        run: kubectl get nodes
       - name: Helm Deploy # deploying our helm chart to our cluster
-        run: >
+        run: |
           helm upgrade
           --install
           --set image=${{ steps.repo.outputs.repo_name }}
