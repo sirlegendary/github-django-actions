@@ -115,20 +115,35 @@ jobs:
           aws eks --region ${{ env.AWS_REGION }} update-kubeconfig --name ${{ env.EKS_CLUSTER }}
       - name: Get active Nodes
         run: kubectl get nodes
-      - name: Helm Deploy # deploying our helm chart to our cluster
-        run: >
-          helm upgrade \
-          --install \
-          --wait \
-          --atomic \
-          app \
-          /k8s \
-          --set image=${{ steps.repo.outputs.repo_name }} \
-          --set user=${{ env.DB_USER }} \
-          --set password=${{ env.DB_PASSWORD }} \
-          --set host=${{ env.DB_HOST }} \
-          --set port=${{ env.DB_PORT }} \
-          --set name=${{ env.DB_NAME }}
+      - name: Install release
+        uses: hiberbee/github-action-helm@latest
+        with:
+          helm: upgrade \
+                --install \
+                --wait \
+                --atomic \
+                --set image=${{ steps.repo.outputs.repo_name }} \
+                --set user=${{ env.DB_USER }} \
+                --set password=${{ env.DB_PASSWORD }} \
+                --set host=${{ env.DB_HOST }} \
+                --set port=${{ env.DB_PORT }} \
+                --set name=${{ env.DB_NAME }}
+                app \
+                ./k8s 
+      # - name: Helm Deploy # deploying our helm chart to our cluster
+      #   run: >
+      #     helm upgrade \
+      #     --install \
+      #     --wait \
+      #     --atomic \
+      #     --set image=${{ steps.repo.outputs.repo_name }} \
+      #     --set user=${{ env.DB_USER }} \
+      #     --set password=${{ env.DB_PASSWORD }} \
+      #     --set host=${{ env.DB_HOST }} \
+      #     --set port=${{ env.DB_PORT }} \
+      #     --set name=${{ env.DB_NAME }}
+      #     app \
+      #     ./k8s 
       - name: Check pods # checking pod list to see if they are running.
         run: kubectl get pods
       - name: Get Service details
