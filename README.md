@@ -19,3 +19,5 @@ conda deactivate
 ## [Helm 3 Github Action](https://github.com/marketplace/actions/helm-3)
 
 ## [Kubernetes unnecessarily requiring quoting on numeric env vars](https://github.com/kubernetes/kubernetes/issues/82296)
+
+## [DGANGO wildcard in ALLOWED HOST](https://xxx-cook-book.gitbooks.io/django-cook-book/content/Settings/allowed-hosts.html)
