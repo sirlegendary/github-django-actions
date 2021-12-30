@@ -60,8 +60,8 @@ jobs:
         run: python --version
       - name: Install requirements # install application requirements
         run: pip install -r requirements.txt
-      # - name: Check Syntax # check code formatting
-      #   run: pycodestyle --statistics .
+      - name: Check Syntax # check code formatting
+        run: pycodestyle --statistics .
       - name: Run Migrations # run migrations to create table in side car db container
         run: python manage.py migrate
       - name: Run Test # running tests
@@ -121,14 +121,14 @@ jobs:
           --install \
           --wait \
           --atomic \
-          app \
-          /k8s \
           --set image=${{ steps.repo.outputs.repo_name }} \
           --set user=${{ env.DB_USER }} \
           --set password=${{ env.DB_PASSWORD }} \
           --set host=${{ env.DB_HOST }} \
           --set port=${{ env.DB_PORT }} \
           --set name=${{ env.DB_NAME }}
+          app \
+          ./k8s 
       - name: Check pods # checking pod list to see if they are running.
         run: kubectl get pods
       - name: Get Service details
