@@ -95,11 +95,6 @@ jobs:
     steps:
       - name: Checkout code # checking out code.
         uses: actions/checkout@v2
-      # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master # settings up gcloud cli in our job machine.
-      #   with:
-      #     version: '270.0.0'
-      #     service_account_email: ${{ secrets.GKE_EMAIL }} # email address of our service account that will be created with storage and kubernetes permissions
-      #     service_account_key: ${{ secrets.GKE_PASSWORD }} # service account file.
       - name: Set Repo Location # steps required to find the image id of our image from contiainer registry
         id: repo
         run: echo "::set-output name=repo_name::${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}" # we are setting the image location as output to be used in later step
@@ -116,10 +111,7 @@ jobs:
       - name: Get active Nodes
         run: kubectl get nodes
       - name: Helm Deploy # deploying our helm chart to our cluster
-        # uses: WyriHaximus/github-action-helm3@v2
-        # with:
         run: >
-          # exec:
           helm upgrade \
           --install \
           --wait \
