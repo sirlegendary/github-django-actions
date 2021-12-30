@@ -121,9 +121,9 @@ jobs:
         # run: >
           exec:
             helm upgrade
+            --install 
             app 
             ./k8s 
-            --install 
             --set image=${{ steps.repo.outputs.repo_name }} 
             --set user=${{ secrets.DB_USER }} 
             --set password=${{ secrets.DB_PASSWORD }} 
