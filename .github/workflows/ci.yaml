@@ -116,6 +116,7 @@ jobs:
       - name: Get active Nodes
         run: kubectl get nodes
       - name: Helm Deploy # deploying our helm chart to our cluster
+        uses: WyriHaximus/github-action-helm3@v2
         run: >
           helm upgrade
           app 
