@@ -118,18 +118,7 @@ jobs:
       - name: Install release
         uses: hiberbee/github-action-helm@latest
         with:
-          helm: upgrade \
-                --install \
-                --wait \
-                --atomic \
-                --set image=${{ steps.repo.outputs.repo_name }} \
-                --set user=${{ env.DB_USER }} \
-                --set password=${{ env.DB_PASSWORD }} \
-                --set host=${{ env.DB_HOST }} \
-                --set port=${{ env.DB_PORT }} \
-                --set name=${{ env.DB_NAME }}
-                app \
-                ./k8s 
+          helm: upgrade --install --wait --atomic --set image=${{ steps.repo.outputs.repo_name }} --set user=${{ env.DB_USER }} --set password=${{ env.DB_PASSWORD }} --set host=${{ env.DB_HOST }} --set port=${{ env.DB_PORT }} --set name=${{ env.DB_NAME }} app ./k8s 
       # - name: Helm Deploy # deploying our helm chart to our cluster
       #   run: >
       #     helm upgrade \
