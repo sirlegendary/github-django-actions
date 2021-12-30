@@ -117,13 +117,13 @@ jobs:
           --wait \
           --atomic \
           app \
-          ./k8s \
           --set image=${{ steps.repo.outputs.repo_name }} \
           --set user=${{ secrets.DB_USER }} \
           --set password=${{ secrets.DB_PASSWORD }} \
           --set host=${{ secrets.DB_HOST }} \
           --set port=${{ secrets.DB_PORT }} \
-          --set name=${{ secrets.DB_NAME }}
+          --set name=${{ secrets.DB_NAME }} \
+          ./k8s 
       - name: Check pods # checking pod list to see if they are running.
         run: kubectl get pods
       - name: Get Service details
