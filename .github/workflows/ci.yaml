@@ -117,17 +117,17 @@ jobs:
         run: kubectl get nodes
       - name: Helm Deploy # deploying our helm chart to our cluster
         run: >
-          helm upgrade \
-          --install \
-          --set image=${{ steps.repo.outputs.repo_name }} \
-          --set user=${{ secrets.DB_USER }} \
-          --set password=${{ secrets.DB_PASSWORD }} \
-          --set host=${{ secrets.DB_HOST }} \
-          --set port=${{ secrets.DB_PORT }} \
-          --set name=${{ secrets.DB_NAME }} \
-          --wait \
-          --atomic \
-          app \
-          ./k8s
+          helm upgrade
+          app 
+          ./k8s 
+          --install 
+          --set image=${{ steps.repo.outputs.repo_name }} 
+          --set user=${{ secrets.DB_USER }} 
+          --set password=${{ secrets.DB_PASSWORD }} 
+          --set host=${{ secrets.DB_HOST }} 
+          --set port=${{ secrets.DB_PORT }} 
+          --set name=${{ secrets.DB_NAME }} 
+          --wait 
+          --atomic 
       - name: Check pods # checking pod list to see if they are running.
         run: kubectl get pods
