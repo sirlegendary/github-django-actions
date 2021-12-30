@@ -41,6 +41,9 @@ spec:
                   key: host
                   name: appsecrets
             - name: DB_PORT
-              value: "5432"
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: appsecrets
           ports:
             - containerPort: 8000
