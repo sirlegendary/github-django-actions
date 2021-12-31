@@ -25,7 +25,7 @@ env:
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   # DB_HOST: ${{ secrets.DB_HOST }}
   DB_NAME: ${{ secrets.DB_NAME }}
-  DB_HOST: postgres://$(DB_USER):$(DB_PASSWORD)@postgres:5432/$(DB_NAME)
+  DB_HOST: postgres://${{ secrets.DB_USER }}:${{ secrets.DB_PASSWORD }}@postgres:5432/${{ secrets.DB_NAME }}
 
 # three job definition
 jobs:
