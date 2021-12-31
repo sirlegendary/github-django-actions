@@ -12,6 +12,12 @@ conda activate github-action
 conda deactivate
 ```
 
+## Connect to cluster
+
+``` Bash
+aws eks --region us-east-1 update-kubeconfig --name eks-dev-cluster
+```
+
 ## ssh into pods
 
 ``` Bash
