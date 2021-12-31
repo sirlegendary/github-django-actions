@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if board %}
+    
+        <h1>Board Title: {{ board.title }}</h1>
+        <a href="{% url 'create_board_text'  board.id %}">Add Text to board</a>
+        ||
+         <a href="{% url 'create_url'  board.id %}">Add URL board</a>
+        ||
+         <a href="{% url 'create_sticky_note'  board.id %}">Add Sticky Note to board</a>
+        ||
+         <a href="{% url 'upload_image'  board.id %}">Upload Image</a>
+        ||
+         <a href="{% url 'upload_video'  board.id %}">Upload Video</a>
+        <hr>
+    
+{% endif %}
+
+{% if error_message %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Error!</strong> {{ error_message }}
+    </div>
+{% endif %}
+
+{% if success_message %}
+    <div class="info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Success!</strong> {{ success_message }}
+    </div>
+{% endif %}
+
+
+{% if boardtexts %}
+    <h1>Board Texts:</h1>
+    {% for bt in boardtexts %}
+        <br>
+        <h3>
+            {{ bt.text }}
+            <a href="{% url 'edit_board_text' bt.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+            <a href="{% url 'delete_board_text' bt.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+        </h3>
+    {% endfor %}
+    <hr>
+    <br>
+{% endif %}
+
+
+{% if url %}
+    <h1>URLS:</h1>
+    {% for link in url %}
+        <br>
+        <h3>
+            <a href="{{ link.url}}" target="_blank">{{ link.title}}</a>
+            <a href="{% url 'edit_url' link.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+            <a href="{% url 'delete_url' link.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+        </h3>
+    {% endfor %}
+    <hr>
+    <br>
+{% endif %}
+
+
+{% if notes %}
+    <h1>Sticky Notes:</h1>
+    {% for note in notes %}
+        <br>
+        <h3>
+            {{ note.note }}
+            <a href="{% url 'edit_sticky_note' note.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+            <a href="{% url 'delete_sticky_note' note.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+        </h3>
+    {% endfor %}
+    <hr>
+    <br>
+{% endif %}
+
+{% if images %}
+    <h1>Images:</h1>
+    {% for image in images %}
+        <img src="{{ image.image.url }}" class="img-responsive" height="100" width="100" />
+        <a href="{% url 'delete_image' image.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a> 
+        <br>
+    {% endfor %}
+{% endif %}
+
+{% if videos %}
+    <h1>Video:</h1>
+    {% for video in videos %}
+        <video width="320" height="240" controls>
+            <source src="{{ video.video.url }}" type="video/mp4"> 
+            <!-- <source src="{{ video.video }}" type="video/ogg"> -->
+          Your browser does not support the video tag.
+        </video>
+        <a href="{% url 'delete_video' video.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a> 
+        <br>
+    {% endfor %}
+{% endif %}
+
+
+<br>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

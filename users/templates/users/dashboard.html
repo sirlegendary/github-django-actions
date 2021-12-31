@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container">
+<h1>Hello, {{ user.username|default:'Guest' }}!</h1>
+
+{% if error_message %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Error!</strong> {{ error_message }}
+    </div>
+{% endif %}
+
+{% if success_message %}
+    <div class="info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Success!</strong> {{ success_message }}
+    </div>
+{% endif %}
+
+<div>
+    {% if user.is_authenticated %}
+        <h3><a href="{% url 'create_board' %}">Create New Board</a></h3>
+        {% if boards %}
+            <h3>Boards</h3>
+            {% for board in boards %}
+                <p>
+                    <a href="{% url 'board' board.id %}">{{ board.title }}</a>
+                    <a href="{% url 'edit_board' board.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+                    <a href="{% url 'delete_board' board.id %}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+                </p>
+            {% endfor %}
+        {% endif %}
+        <br><br>
+        <a href="{% url 'logout' %}">Logout</a>
+        <br/>
+        <a href="{% url 'password_change' %}">Change password</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <br>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+</div>
+
+</main>
+
+{% endblock %}

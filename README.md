@@ -25,6 +25,10 @@ kubectl exec -it <PODID> bash
 ```
 
 ``` Bash
+kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' | head -1)" bash
+```
+
+``` Bash
 # Check manage.py
 python manage.py check
 ```
@@ -38,14 +42,16 @@ from django.conf import settings
 print(settings.DATABASES)
 ```
 
-## Check DB connection
+## Migrate DB
 
 ``` Bash
 kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' | head -1)" python manage.py migrate
 ```
 
+## Create Superuser
+
 ``` Bash
-kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' | head -1)" bash
+kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' | head -1)" python manage.py createsuperuser
 ```
 
 ## [Blog post](https://medium.com/intelligentmachines/github-actions-end-to-end-ci-cd-pipeline-for-django-5d48d6f00abf)

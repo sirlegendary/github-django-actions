@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error_message %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Error!</strong> {{ error_message }}
+    </div>
+{% endif %}
+
+{% if success_message %}
+    <div class="info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Success!</strong> {{ success_message }}
+    </div>
+{% endif %}
+
+
+<h2>Upload Video to Board</h2>
+<form action="{% url 'upload_video' board_id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="video" class="form-control" accept="video/*" required="">
+    <a href="{% url 'board' board_id %}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+    <button type="submit">Upload</button>
+</form>
+
+
+
+{% endblock %}

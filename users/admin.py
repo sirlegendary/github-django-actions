@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Board, BoardText, StickyNotes, Url, Image, Video
 
-# Register your models here.
+admin.site.register(Board)
+admin.site.register(BoardText)
+admin.site.register(StickyNotes)
+admin.site.register(Url)
+admin.site.register(Image)
+admin.site.register(Video)
