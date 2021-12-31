@@ -101,7 +101,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Repo Location # steps required to find the image id of our image from contiainer registry
         id: repo
-        run: echo "::set-output name=repo_name::961470329390.dkr.ecr.us-east-1.amazonaws.com${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}" # we are setting the image location as output to be used in later step
+        run: echo "::set-output name=repo_name::485159269806.dkr.ecr.us-east-1.amazonaws.com${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}" # we are setting the image location as output to be used in later step
       - name: Check Repo Location
         run: echo ${{ steps.repo.outputs.repo_name }} # checking our repo location
       - name: Install Helm # helm installation in our runner for deploying.
