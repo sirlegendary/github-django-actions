@@ -123,3 +123,5 @@ jobs:
         run: kubectl get pods
       - name: Get Service details
         run: kubectl get svc
+      - name: Run migration
+        run: kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' | head -1)" python manage.py migrate
