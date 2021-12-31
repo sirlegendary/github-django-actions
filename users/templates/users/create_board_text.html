@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error_message %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Error!</strong> {{ error_message }}
+    </div>
+{% endif %}
+
+{% if success_message %}
+    <div class="info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Success!</strong> {{ success_message }}
+    </div>
+{% endif %}
+
+
+{% if board_text %}
+    <h2>Update Board Text</h2>
+    <form action="{% url 'edit_board_text' board_text.id %}" method="post">
+        {% csrf_token %}
+        <textarea class="form-control" name="board_text" rows="4">{{ board_text.text}}</textarea>
+        <a href="{% url 'board' board_id %}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+        <button type="submit">Update</button>
+    </form>
+{% else %}
+    <h2>Add new Text to Board</h2>
+    <form action="{% url 'create_board_text' board_id %}" method="post">
+        {% csrf_token %}
+        <textarea class="form-control" name="board_text" rows="4"></textarea>
+        <a href="{% url 'board' board_id %}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+        <button type="submit">Save</button>
+    </form>
+{% endif %}
+
+
+{% endblock %}

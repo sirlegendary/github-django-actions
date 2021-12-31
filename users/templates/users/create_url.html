@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error_message %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Error!</strong> {{ error_message }}
+    </div>
+{% endif %}
+
+{% if success_message %}
+    <div class="info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>Success!</strong> {{ success_message }}
+    </div>
+{% endif %}
+
+{% if url %}
+    <h2>Edit URL</h2>
+    <form action="{% url 'edit_url' url.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{ url.title}}" class="form-control" required="">
+        <input type="text" name="url" value="{{ url.url }}" class="form-control" required="">
+        <a href="{% url 'board' board_id %}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+        <button type="submit">Update</button>
+    </form>
+{% else %}
+    <h2>Add new URL to Board</h2>
+    <form action="{% url 'create_url' board_id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Enter URL Title" value="" class="form-control" required="">
+        <input type="text" name="url" placeholder="Paste URL here" value="" class="form-control" required="">
+        <a href="{% url 'board' board_id %}" class="btn btn-secondary" role="button" aria-pressed="true">Cancel</a>
+        <button type="submit">Save</button>
+    </form>
+{% endif %}
+
+
+{% endblock %}
