@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&=y=oq5lec3xw&(69ndt1494q-m&!^=v9-on^m62-@j_eqh=tz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '.amazonaws.com' ]
+ALLOWED_HOSTS = [ '.amazonaws.com', '127.0.0.1' ]
 
 
 # Application definition
@@ -85,6 +85,13 @@ if os.getenv('GITHUB_WORKFLOW'):
             'PORT': '5432'
         }
     }
+elif os.getenv('LOCAL_WORKFLOW'):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 else:
     DATABASES = {
         'default': {
@@ -96,13 +103,6 @@ else:
             'PORT': os.getenv('DB_PORT')
         }
     }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
