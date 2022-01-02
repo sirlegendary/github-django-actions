@@ -87,13 +87,13 @@ if os.getenv('GITHUB_WORKFLOW'):
             'PORT': '5432'
         }
     }
-# elif os.getenv('LOCAL_WORKFLOW'):
-#     DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
+elif os.getenv('LOCAL_WORKFLOW'):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 else:
     DATABASES = {
         'default': {
