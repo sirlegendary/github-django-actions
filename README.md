@@ -63,3 +63,5 @@ kubectl exec -it "$(kubectl get pods | awk '$0 ~ /app-deployment-/ {print $1}' |
 ## [Kubernetes unnecessarily requiring quoting on numeric env vars](https://github.com/kubernetes/kubernetes/issues/82296)
 
 ## [DGANGO wildcard in ALLOWED HOST](https://xxx-cook-book.gitbooks.io/django-cook-book/content/Settings/allowed-hosts.html)
+
+## [Storing Django static files on S3](https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/)
