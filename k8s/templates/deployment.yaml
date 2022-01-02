@@ -57,5 +57,7 @@ spec:
                 secretKeyRef:
                   key: bucket
                   name: appsecrets
+            - name: USE_S3
+              value: "TRUE"
           ports:
             - containerPort: 8000
