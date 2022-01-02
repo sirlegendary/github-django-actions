@@ -42,5 +42,20 @@ spec:
                   name: appsecrets
             - name: DB_PORT
               value: "5432"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: access_key
+                  name: appsecrets
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret_key
+                  name: appsecrets
+            - name: AWS_STORAGE_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: bucket
+                  name: appsecrets
           ports:
             - containerPort: 8000

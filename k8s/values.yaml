@@ -3,3 +3,6 @@ user: custom-value
 password: custom-value
 host: custom-value
 name: custom-value
+access_key: custom-value
+secret_key: custom-value
+bucket: custom-value
