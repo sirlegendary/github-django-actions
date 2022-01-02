@@ -118,6 +118,8 @@ jobs:
           aws eks --region ${{ env.AWS_REGION }} update-kubeconfig --name ${{ env.EKS_CLUSTER }}
       - name: Get active Nodes
         run: kubectl get nodes
+      - name: Rollback helm
+        run: helm rollback app
       - name: Install release
         uses: hiberbee/github-action-helm@latest
         with:
